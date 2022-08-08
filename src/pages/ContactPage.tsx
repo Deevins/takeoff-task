@@ -1,14 +1,12 @@
-import React from 'react';
-import {useParams} from "react-router-dom";
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import MainLayout from '../layouts/MainLayout'
+import ContactCard from '../components/contacts/ContactCard'
 
-const ContactPage:React.FC = () => {
-  const {contactId} = useParams()
-  console.log(contactId)
-  return (
-    <div>
-      Single contact with id {contactId}
-    </div>
-  );
-};
+const ContactPage: React.FC = () => {
+  const { contactId } = useParams()
 
-export default ContactPage;
+  return <MainLayout>ContactCard with {contactId}</MainLayout>
+}
+
+export default ContactPage

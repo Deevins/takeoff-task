@@ -1,0 +1,71 @@
+.cardRoot {
+  background: #a7a7a7;
+  width: 500px;
+  height: 200px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+
+  .cardHeader {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+
+    .userAvatar {
+      margin: 9px 0 0 8px;
+      width: 60px;
+      height: 60px;
+    }
+
+    .cardButtonsBlock {
+      width: 80px;
+      height: 40px;
+      display: flex;
+      margin-right: 10px;
+
+      .cardIcon {
+        width: 30px;
+        height: 30px;
+
+        &:hover {
+          cursor: pointer;
+          -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+          transform: scale(1.1);
+        }
+
+        &:first-child {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+
+  .cardContent {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto 0 70px;
+
+    span {
+      font-weight: bold;
+    }
+
+    p {
+      margin-bottom: 4px;
+      white-space: nowrap; /* Запрещаем перенос строк */
+      overflow: hidden; /* Обрезаем все, что не помещается в область */
+      text-overflow: ellipsis; /* Добавляем многоточие */
+      &:hover {
+        text-overflow: revert;
+      }
+    }
+
+  }
+
+}

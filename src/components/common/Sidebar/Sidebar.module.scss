@@ -1,0 +1,34 @@
+@import "src/scss/variables";
+
+.sidebarRoot {
+  color: white;
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: rgba(195, 195, 195, 0.87);
+  overflow-x: hidden;
+  padding-top: 55px;
+
+  .sidebarElem {
+    padding: 6px 8px 6px 16px;
+    border: 1px #768b94 solid;
+    font-size: 14.5px;
+    color: black;
+    display: block;
+    margin: 0 auto;
+    border-radius: 7px;
+    background: rgba(220, 221, 222, 0.46);
+
+    &:hover {
+      cursor: pointer;
+      background: $navigation-button_hover;
+      -webkit-transform: scale(1.02);
+      -ms-transform: scale(1.02);
+      transform: scale(1.02);
+    }
+  }
+
+}

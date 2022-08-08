@@ -1,3 +1,5 @@
-import {IUserInitialState} from "store/user/types";
-
-export interface IUser extends IUserInitialState{}
+export interface IUser {
+  email: string | null
+  username: string | null
+  token: string | null
+}

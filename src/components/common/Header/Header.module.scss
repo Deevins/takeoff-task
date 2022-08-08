@@ -1,3 +1,91 @@
+@import "./src/scss/variables";
+
 .root {
-  background: red;
+  height: 50px;
+  background: rgba(195, 195, 195, 1);
+  margin-left: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //-webkit-box-shadow: -1px 9px 15px -4px rgba(0, 0, 0, 0.28);
+  //box-shadow: -1px 9px 15px -4px rgba(0, 0, 0, 0.28);;
+
+  .userContainer {
+    margin-left: 10px;
+    @media screen and (max-width: 600px) {
+      width: 150px;
+      font-size: 12px;
+
+    }
+  }
+
+  span {
+    font-weight: 700;
+  }
+
+  .userImage {
+    width: 25px;
+    height: 25px;
+    justify-self: center;
+    border-radius: 50%;
+  }
+
+  .searchBlock {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+
+    .searchBlock_input {
+      padding: 3px 0 3px 6px;
+      border: none;
+      font-size: 17px;
+      background: rgba(255, 255, 255, 0.6);
+      @media screen and (max-width: 1070px) {
+        font-size: 12px;
+        width: 40%;
+      }
+
+      @media screen and (max-width: 810px) {
+        display: block;
+        text-align: left;
+        width: 25%;
+        margin: 0;
+        padding: 14px;
+      }
+    }
+
+    button {
+      float: none;
+      display: block;
+      text-align: left;
+      margin: 0;
+      border-radius: 0 6px 6px 0;
+
+      &:hover {
+        cursor: pointer;
+
+      }
+    }
+  }
+
+
+  .headerButton {
+    border: 1px #768b94 solid;
+    border-radius: 9px;
+    background: rgba(220, 221, 222, 0.46);
+    padding: 3px 10px 3px 10px;
+    margin-right: 25px;
+    @media screen and (max-width: 670px) {
+      margin-right: 8px;
+      margin-left: 5px;
+    }
+
+    &:hover {
+      background: $navigation-button_hover;
+      cursor: pointer;
+      -webkit-transform: scale(1.02);
+      -ms-transform: scale(1.02);
+      transform: scale(1.02);
+    }
+  }
 }

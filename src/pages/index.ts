@@ -1,11 +1,6 @@
-import ContactList from "./ContactList";
-import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
-import ContactPage from "./ContactPage";
+import ContactListPage from './ContactListPage'
+import LoginPage from './LoginPage'
+import RegisterPage from './RegisterPage'
+import ContactPage from './ContactPage'
 
-export {
-  ContactList,
-  LoginPage,
-  RegisterPage,
-  ContactPage
-}
+export { ContactListPage, LoginPage, RegisterPage, ContactPage }

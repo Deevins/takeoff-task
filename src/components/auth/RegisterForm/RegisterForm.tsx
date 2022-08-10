@@ -2,13 +2,13 @@ import React, { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './RegisterForm.module.scss'
-import img from '../../../assets/img/empty_image.png'
+import img from 'assets/img/empty_image.png'
 
-import { IAuthForm } from '../../../types/IAuthForm'
 import Input from '../../common/Input'
-import { useAppDispatch } from '../../../redux/store'
-import { setUser } from '../../../redux/user/userSlice'
-import { register } from '../../../api/firebase/auth'
+import { useAppDispatch } from 'redux/store'
+import { setUser } from 'redux/user/userSlice'
+import { register } from 'api/firebase/auth'
+import { IAuthForm } from 'types/IAuthForm'
 
 const RegisterForm: React.FC<IAuthForm> = ({ title }) => {
   const dispatch = useAppDispatch()

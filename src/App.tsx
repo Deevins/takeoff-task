@@ -12,7 +12,6 @@ import { setUser } from 'redux/user/userSlice'
 import { RequireAuth } from 'components/auth/RequireAuth/RequireAuth'
 import Loader from 'components/common/Loader'
 
-// TODO: register and login forms should be refactored later. Create 1 form that accepts action(login/register) and data.
 // TODO: create separate object with routes
 
 const App: React.FC = () => {
@@ -34,6 +33,7 @@ const App: React.FC = () => {
     } else {
       console.log('You are not authorized!')
     }
+    //eslint-disable-next-line
   }, [dispatch, user])
 
   if (loading) {

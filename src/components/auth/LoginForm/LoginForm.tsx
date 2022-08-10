@@ -1,56 +1,25 @@
-import React, { FormEvent, useState } from 'react'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './LoginForm.module.scss'
 
-import { IAuthForm } from 'types/IAuthForm'
 import Input from '../../common/Input'
-import { Link, useNavigate } from 'react-router-dom'
-import { setUser } from '../../../redux/user/userSlice'
-import { useAppDispatch } from 'redux/store'
-import { auth } from '../../../firebase'
-import { AuthErrorsEnum } from '../../../types/enums/AuthErrorsEnum'
+
+import { login } from '../../../api/firebase/auth'
+
+import { IAuthForm } from 'types/IAuthForm'
 
 const LoginForm: React.FC<IAuthForm> = ({ title }) => {
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   const handleLogin = async (
-    event: FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>,
     email: string,
     password: string
   ) => {
     event.preventDefault()
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user
-        dispatch(
-          setUser({
-            email: user.email,
-            username: user.displayName,
-            uid: user.uid
-          })
-        )
-        console.log(user)
-        navigate('/')
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log(`Error code is ${errorCode} and  error message is ${errorMessage}`)
-        if (
-          errorCode === AuthErrorsEnum.WRONG_PASSWORD ||
-          errorCode === AuthErrorsEnum.INVALID_EMAIL ||
-          errorCode === AuthErrorsEnum.USER_NOT_FOUND
-        ) {
-          alert(
-            'Адрес электронной почты и/или пароль, которые вы указали, неверны. Попробуйте ещё раз!'
-          )
-        }
-      })
+    await login(email, password)
   }
 
   return (

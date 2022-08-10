@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 import styles from './Sidebar.module.scss'
-import Modal from '../Modal'
-import { addDocumentToCollection } from '../../../api/firebase/addDocumentToCollection'
-import { useAuthState } from 'react-firebase-hooks/auth'
+
 import { auth } from '../../../firebase'
 
-const Sidebar = () => {
-  const [user, loading] = useAuthState(auth)
-  const [isActive, setIsActive] = useState(false)
+import Modal from '../Modal'
 
-  const [name, setName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [city, setCity] = useState('')
+import { addDocumentToCollection } from 'api/firebase/addDocumentToCollection'
+
+const Sidebar = () => {
+  const [user] = useAuthState(auth)
+  const [isActive, setIsActive] = React.useState(false)
+
+  const [name, setName] = React.useState('')
+  const [phoneNumber, setPhoneNumber] = React.useState('')
+  const [city, setCity] = React.useState('')
 
   const onClickCreate = async () => {
     if (user) await addDocumentToCollection({ city, fullName: name, phoneNumber }, user)
@@ -24,9 +27,11 @@ const Sidebar = () => {
 
   return (
     <div className={styles.sidebarRoot}>
-      <button className={styles.sidebarElem} onClick={() => setIsActive(true)}>
-        Добавить контакт
-      </button>
+      <div className={styles.sidebarContent}>
+        <button className={styles.sidebarElem} onClick={() => setIsActive(true)}>
+          Добавить контакт
+        </button>
+      </div>
       <Modal isActive={isActive} setIsActive={setIsActive}>
         <h1>Добавить контакт</h1>
         <span>

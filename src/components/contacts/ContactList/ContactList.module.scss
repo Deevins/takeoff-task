@@ -3,6 +3,11 @@
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  margin-left: 160px;
+
+  @media screen and (max-width: 510px) {
+    margin-left: 80px;
+  }
 }
 
 .alertTitle {

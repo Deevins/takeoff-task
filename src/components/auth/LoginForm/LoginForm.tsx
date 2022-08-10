@@ -26,7 +26,6 @@ const LoginForm: React.FC<IAuthForm> = ({ title }) => {
     event.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(`CREATE ` + userCredential)
         const user = userCredential.user
         dispatch(
           setUser({
@@ -74,22 +73,22 @@ const LoginForm: React.FC<IAuthForm> = ({ title }) => {
               />
             </label>
             <label className={styles.inputBlock}>
-              <p>Password</p>
+              <p>Пароль</p>
               <Input
-                placeholder={'password'}
+                placeholder={'Пароль'}
                 value={password}
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <button form={'my-form'} className={styles.loginButton}>
-              Login
+              Войти
             </button>
             <p className={styles.subText}>
-              Do not have an account?
+              Нет аккаунта?
               <Link to={'/register'} className={styles.link}>
                 {' '}
-                Sign up
+                Зарегистрироваться
               </Link>
             </p>
           </form>

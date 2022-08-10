@@ -18,7 +18,8 @@ import {
   where,
   doc,
   deleteDoc,
-  orderBy
+  orderBy,
+  updateDoc
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -49,6 +50,7 @@ export {
   addDoc,
   getDoc,
   getDocs,
+  updateDoc,
   deleteDoc,
   collection,
   query,

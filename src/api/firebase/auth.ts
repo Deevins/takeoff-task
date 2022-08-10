@@ -1,15 +1,6 @@
 import { auth, createUserWithEmailAndPassword, updateProfile } from '../../firebase'
-import firebase from 'firebase/compat/app'
-import img from '../../assets/img/empty_image.png'
-import { setUser } from '../../redux/user/userSlice'
 
-export const register = async (
-  auth: any,
-  email: string,
-  password: string,
-  username: string,
-  img: string
-) => {
+export const register = async (email: string, password: string, username: string, img: string) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password)
   await updateProfile(user, {
     displayName: username,
@@ -23,17 +14,3 @@ export const register = async (
     photoUrl: img
   }
 }
-
-// createUserWithEmailAndPassword(auth, email, password)
-//   .then((userAuth) => {
-//     // Update the newly created user with a display name
-//     updateProfile(userAuth.user, {
-//       displayName: username,
-//       photoURL: img
-//     })
-//   })
-//   .catch((err: any) => {
-//     alert(err)
-//   })
-// }
-// export {}

@@ -1,8 +1,8 @@
 @import './src/scss/variables';
 
 .modal {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   background: rgba(0, 0, 0, 0.65);
   position: fixed;
@@ -34,6 +34,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media screen and (max-width: 670px) {
+      width: auto
+    }
 
     h1 {
       align-self: center;

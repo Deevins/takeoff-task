@@ -1,6 +1,8 @@
-import { IContact } from '../../types/IContact'
-import { firestore, collection, addDoc, serverTimestamp } from '../../firebase'
 import { nanoid } from 'nanoid'
+
+import { firestore, collection, addDoc, serverTimestamp } from '../../firebase'
+
+import { IContact } from '../../types/IContact'
 
 export const addDocumentToCollection = async (contact: IContact, user: { uid: string }) => {
   const { phoneNumber, city, fullName } = contact

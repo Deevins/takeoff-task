@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import styles from './RegisterForm.module.scss'
 import img from '../../../assets/img/empty_image.png'
@@ -7,8 +7,6 @@ import img from '../../../assets/img/empty_image.png'
 import { IAuthForm } from '../../../types/IAuthForm'
 import Input from '../../common/Input'
 import { useAppDispatch } from '../../../redux/store'
-import { auth, createUserWithEmailAndPassword, updateProfile } from '../../../firebase'
-import { fetchAuthenticatedUser } from '../../../redux/user/asyncActions'
 import { setUser } from '../../../redux/user/userSlice'
 import { register } from '../../../api/firebase/auth'
 
@@ -26,24 +24,8 @@ const RegisterForm: React.FC<IAuthForm> = ({ title }) => {
   ) => {
     event.preventDefault()
 
-    const userCredentials = await register(auth, email, password, username, img)
+    const userCredentials = await register(email, password, username, img)
     dispatch(setUser(userCredentials))
-
-    // IT WORKS!
-    // const { user } = await createUserWithEmailAndPassword(auth, email, password)
-    // await updateProfile(user, {
-    //   displayName: username,
-    //   photoURL: img
-    // })
-    // console.log(user)
-    // dispatch(
-    //   setUser({
-    //     email: user.email,
-    //     uid: user.email,
-    //     username: user.displayName,
-    //     photoUrl: img
-    //   })
-    // )
   }
 
   return (
@@ -57,9 +39,9 @@ const RegisterForm: React.FC<IAuthForm> = ({ title }) => {
             onSubmit={(e) => handleRegister(e, email, password, username)}
           >
             <label className={styles.inputBlock}>
-              <p>Username</p>
+              <p>Имя пользователя</p>
               <Input
-                placeholder={'username'}
+                placeholder={'Имя пользователя'}
                 type="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -75,21 +57,22 @@ const RegisterForm: React.FC<IAuthForm> = ({ title }) => {
               />
             </label>
             <label className={styles.inputBlock}>
-              <p>Password</p>
+              <p>Пароль</p>
               <Input
-                placeholder={'password'}
+                placeholder={'Пароль'}
                 value={password}
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <button form={'my-form'} className={styles.registerButton}>
-              Register
+              Зарегистрироваться
             </button>
             <p className={styles.subText}>
-              Already have an account?
+              Уже есть аккаунт?
               <Link to={'/login'} className={styles.link}>
-                Sign in
+                {' '}
+                Войти
               </Link>
             </p>
           </form>

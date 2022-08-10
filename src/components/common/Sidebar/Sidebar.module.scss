@@ -5,12 +5,20 @@
   height: 100%;
   width: 160px;
   position: fixed;
+  margin-top: 50px;
   z-index: 1;
   top: 0;
   left: 0;
   background: rgba(195, 195, 195, 0.87);
   overflow-x: hidden;
-  padding-top: 55px;
+
+  @media screen and (max-width: 510px) {
+    width: 80px;
+  }
+
+  .sidebarContent {
+    margin-top: 10px;
+  }
 
   .sidebarElem {
     padding: 6px 8px 6px 16px;
@@ -21,6 +29,12 @@
     margin: 0 auto;
     border-radius: 7px;
     background: rgba(220, 221, 222, 0.46);
+    @media screen and (max-width: 510px) {
+      width: 70px;
+      padding: 3px;
+      text-align: center;
+      font-size: 10px;
+    }
 
     &:hover {
       cursor: pointer;

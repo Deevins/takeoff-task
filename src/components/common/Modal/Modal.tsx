@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react'
+import clsx from 'clsx'
 
 import styles from './Modal.module.scss'
-import clsx from 'clsx'
 
 type ModalProps = {
   isActive: boolean

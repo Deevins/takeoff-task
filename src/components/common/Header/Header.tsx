@@ -1,24 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaUserCircle } from 'react-icons/fa'
+import { useAppDispatch } from 'redux/store'
+import { useNavigate } from 'react-router-dom'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 import styles from './Header.module.scss'
 
-import img from '../../../assets/img/empty_image.png'
-
-import { useAppDispatch } from 'redux/store'
 import { logout } from 'redux/user/userSlice'
-import { useNavigate } from 'react-router-dom'
-import { auth } from '../../../firebase'
-import { useAuthState } from 'react-firebase-hooks/auth'
+
 import Loader from '../Loader'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../../../redux/user/selectors'
+import Search from './Search'
+import { auth } from '../../../firebase'
 
 const Header: React.FC = () => {
-  //TODO: button to sign out(right corner), to the left of this button user Icon, and  search bar(filter).
   const [user] = useAuthState(auth)
-  const { username } = useSelector(selectUser)
-  const [searchValue, setSearchValue] = useState('')
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -29,30 +24,17 @@ const Header: React.FC = () => {
     navigate('/login')
   }
 
-  const searchContacts = async () => {}
   return user ? (
     <div className={styles.root}>
       <div className={styles.userContainer}>
         <p>
-          Добро пожаловать,{' '}
-          <span>
+          <span className={styles.welcome}>Добро пожаловать, </span>
+          <span className={styles.userName}>
             {user.displayName} <FaUserCircle className={styles.userImage} />
           </span>
         </p>
       </div>
-
-      <div className={styles.searchBlock}>
-        <input
-          className={styles.searchBlock_input}
-          placeholder={'Поиск по контактам...'}
-          type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <button className={styles.headerButton} onClick={searchContacts}>
-          Найти
-        </button>
-      </div>
+      <Search />
       <div>
         <button onClick={handleLogout} className={styles.headerButton}>
           Выйти

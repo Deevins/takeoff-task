@@ -6,14 +6,14 @@ import img from '../../../assets/img/empty_image.png'
 
 import { IAuthForm } from '../../../types/IAuthForm'
 import Input from '../../common/Input'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { useAppDispatch } from '../../../redux/store'
-import { auth } from '../../../firebase'
+import { auth, createUserWithEmailAndPassword, updateProfile } from '../../../firebase'
+import { fetchAuthenticatedUser } from '../../../redux/user/asyncActions'
 import { setUser } from '../../../redux/user/userSlice'
+import { register } from '../../../api/firebase/auth'
 
 const RegisterForm: React.FC<IAuthForm> = ({ title }) => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
@@ -26,29 +26,26 @@ const RegisterForm: React.FC<IAuthForm> = ({ title }) => {
   ) => {
     event.preventDefault()
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userAuth) => {
-        // Update the newly created user with a display name
-        updateProfile(userAuth.user, {
-          displayName: username,
-          photoURL: img
-        })
-        // Dispatch the user information for persistence in the redux state
-        dispatch(
-          setUser({
-            email: userAuth.user.email,
-            uid: userAuth.user.uid,
-            username: username,
-            photoUrl: img
-          })
-        )
-        console.log('User created!')
-        navigate('/')
-      })
-      .catch((err) => {
-        alert(err)
-      })
+    const userCredentials = await register(auth, email, password, username, img)
+    dispatch(setUser(userCredentials))
+
+    // IT WORKS!
+    // const { user } = await createUserWithEmailAndPassword(auth, email, password)
+    // await updateProfile(user, {
+    //   displayName: username,
+    //   photoURL: img
+    // })
+    // console.log(user)
+    // dispatch(
+    //   setUser({
+    //     email: user.email,
+    //     uid: user.email,
+    //     username: user.displayName,
+    //     photoUrl: img
+    //   })
+    // )
   }
+
   return (
     <div className={styles.root}>
       <div className={styles.authContainer}>

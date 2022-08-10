@@ -6,7 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 export function RequireAuth({ children }: { children: JSX.Element }) {
   let location = useLocation()
   const [user] = useAuthState(auth)
-  if (user === null) {
+  if (!user) {
     return <Navigate to="/login" state={{ from: location }} replace />
   }
   return children

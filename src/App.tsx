@@ -1,7 +1,7 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { ContactListPage, ContactPage, LoginPage, RegisterPage } from './pages'
-import { auth } from './firebase'
+import { auth, onAuthStateChanged } from './firebase'
 import { useAppDispatch } from './redux/store'
 import { setUser } from './redux/user/userSlice'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -11,14 +11,31 @@ import Loader from './components/common/Loader'
 // TODO: register and login forms should be refactored later. Create 1 form that accepts action(login/register) and data.
 // TODO: create opportunity to edit contact in modal window
 // TODO: create separate object with routes
+// TODO: перенести функции авторизации/регистрации в api. Также сделать там отдельные файлы для создания, редактирования и удаления контактов.
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [user, loading, error] = useAuthState(auth)
 
   //Проверяем, авторизован ли пользователь, если да, то информируем Redux и разрешаем переход по private roots
+  // React.useEffect(() => {
+  //   if (user) {
+  //     dispatch(
+  //       setUser({
+  //         email: user.email,
+  //         uid: user.uid,
+  //         username: user.displayName
+  //       })
+  //     )
+  //   } else {
+  //     console.log('You are not authorized!')
+  //   }
+  // }, [dispatch, user])
+
   React.useEffect(() => {
-    if (user) {
+    if (user && !loading) {
+      console.log(`fkdlsfjsdajsdf ${user.displayName}`)
       dispatch(
         setUser({
           email: user.email,
@@ -26,10 +43,11 @@ const App: React.FC = () => {
           username: user.displayName
         })
       )
+      navigate('/')
     } else {
-      console.log('You are not authorized!')
+      // console.log('You are not authorized!')
     }
-  }, [dispatch, user])
+  }, [dispatch, navigate, user])
 
   if (loading) {
     return <Loader />

@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -7,8 +7,19 @@ import {
   signOut,
   updateProfile
 } from 'firebase/auth'
-import { getFirestore, getDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import firebase from 'firebase/compat'
+import {
+  getFirestore,
+  getDoc,
+  collection,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+  query,
+  where,
+  doc,
+  deleteDoc,
+  orderBy
+} from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -21,19 +32,28 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig)
+const firebaseApp = firebase.initializeApp(firebaseConfig)
 
-export const auth = getAuth()
-export const firestore = getFirestore(app)
+//Initialize authentication instance to authorize users
+export const auth = getAuth(firebaseApp)
+
+//Initialize firestore to start working with database
+export const firestore = getFirestore(firebaseApp)
 
 export {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   updateProfile,
   onAuthStateChanged,
-  signInWithEmailAndPassword,
   signOut,
-  getDoc,
-  collection,
   addDoc,
+  getDoc,
+  getDocs,
+  deleteDoc,
+  collection,
+  query,
+  where,
+  doc,
+  orderBy,
   serverTimestamp
 }

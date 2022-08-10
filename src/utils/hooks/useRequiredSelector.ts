@@ -1,5 +1,5 @@
 import { useTypedSelector } from './useTypedSelector'
-import { RootState } from '../redux/store'
+import { RootState } from '../../redux/store'
 
 export const useRequiredTypedSelector = <TResult>(
   select: (state: RootState) => TResult | undefined | null

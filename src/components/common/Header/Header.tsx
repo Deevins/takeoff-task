@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { nanoid } from 'nanoid'
 
 import styles from './Header.module.scss'
 
 import img from '../../../assets/img/empty_image.png'
 
 import { useAppDispatch } from 'redux/store'
-import { logout, setUser } from 'redux/user/userSlice'
+import { logout } from 'redux/user/userSlice'
 import { useNavigate } from 'react-router-dom'
-import { auth, firestore, getDoc, collection, addDoc, serverTimestamp } from '../../../firebase'
+import { auth } from '../../../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Loader from '../Loader'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../../redux/user/selectors'
 
 const Header: React.FC = () => {
   //TODO: button to sign out(right corner), to the left of this button user Icon, and  search bar(filter).
   const [user] = useAuthState(auth)
+  const { username } = useSelector(selectUser)
   const [searchValue, setSearchValue] = useState('')
-  // const [contacts, loading] = useCollectionData()
-  // console.log(contacts)
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -30,38 +29,18 @@ const Header: React.FC = () => {
     navigate('/login')
   }
 
-  const searchContacts = async () => {
-    console.log(searchValue)
-    try {
-      const docRef = await addDoc(collection(firestore, 'contacts'), {
-        fullName: 'Фио Фиовил Фиолович22',
-        uid: nanoid(),
-        phoneNumber: '8-800-555-35-35',
-        city: 'Moscow city 17',
-        createdAt: serverTimestamp(),
-        createdBy: user?.uid
-      })
-
-      console.log('Document written with ID: ', docRef)
-    } catch (error) {
-      alert(`Error occurred: ${error}`)
-      console.error('Error adding document: ', error)
-    }
-  }
-  if (!user) {
-    return <Loader />
-  }
-
-  return (
+  const searchContacts = async () => {}
+  return user ? (
     <div className={styles.root}>
       <div className={styles.userContainer}>
         <p>
-          Добро пожаловать,
+          Добро пожаловать,{' '}
           <span>
-            <FaUserCircle className={styles.userImage} /> {user.displayName}
+            {user.displayName} <FaUserCircle className={styles.userImage} />
           </span>
         </p>
       </div>
+
       <div className={styles.searchBlock}>
         <input
           className={styles.searchBlock_input}
@@ -80,6 +59,8 @@ const Header: React.FC = () => {
         </button>
       </div>
     </div>
+  ) : (
+    <Loader />
   )
 }
 

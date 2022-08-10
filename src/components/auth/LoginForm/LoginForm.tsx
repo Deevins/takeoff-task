@@ -24,8 +24,9 @@ const LoginForm: React.FC<IAuthForm> = ({ title }) => {
     password: string
   ) => {
     event.preventDefault()
-    await signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log(`CREATE ` + userCredential)
         const user = userCredential.user
         dispatch(
           setUser({

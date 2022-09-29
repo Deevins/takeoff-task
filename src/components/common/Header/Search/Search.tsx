@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styles from './Search.module.scss'
+import Button from "../components/Button";
 
 const Search = () => {
   const [value, setValue] = React.useState('')
@@ -18,9 +19,10 @@ const Search = () => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button className={styles.headerButton} onClick={() => onSubmit()}>
-        Найти
-      </button>
+      {/*<button className={styles.headerButton} onClick={() => onSubmit()}>*/}
+      {/*  Найти*/}
+      {/*</button>*/}
+      <Button text={'Найти'} onUserClick={() => onSubmit()}/>
     </div>
   )
 }

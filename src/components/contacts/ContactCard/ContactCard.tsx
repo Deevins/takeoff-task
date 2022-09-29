@@ -48,8 +48,35 @@ const ContactCard: React.FC<CardProps> = ({ document, ...args }) => {
   //   .toLocaleLowerCase()
   //   .includes(searchValue.toLocaleLowerCase()) ?
 
-  return !isEditable ? (
+  return isEditable ? (
     <div className={styles.cardRoot}>
+      <div className={styles.cardHeader}>
+        <FaUserCircle className={styles.userAvatar} />
+      </div>
+      <div className={styles.cardContent}>
+        <p>
+          <span>ФИО: </span>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </p>
+        <p>
+          <span>Номер: </span>
+          <input
+            type="text"
+            value={tempPhoneNumber}
+            onChange={(e) => setPhoneTempNumber(e.target.value)}
+          />
+        </p>
+        <p>
+          <span>Город: </span>
+          <input type="text" value={tempCity} onChange={(e) => setTempCity(e.target.value)} />
+        </p>
+      </div>
+      <button className={styles.editButtonContainer}>
+        <TbCircleCheck className={styles.editButtonIcon} onClick={onSubmitClick} />
+      </button>
+    </div>
+  ) : (
+    (<div className={styles.cardRoot}>
       <div className={styles.cardHeader}>
         <FaUserCircle className={styles.userAvatar} />
         <div className={styles.cardButtonsBlock}>
@@ -75,38 +102,8 @@ const ContactCard: React.FC<CardProps> = ({ document, ...args }) => {
           {uid}
         </p>
       </div>
-    </div>
-  ) : (
-    <div className={styles.cardRoot}>
-      <div className={styles.cardHeader}>
-        <FaUserCircle className={styles.userAvatar} />
-      </div>
-      <div className={styles.cardContent}>
-        <p>
-          <span>ФИО: </span>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </p>
-        <p>
-          <span>Номер телефона: </span>
-          <input
-            type="text"
-            value={tempPhoneNumber}
-            onChange={(e) => setPhoneTempNumber(e.target.value)}
-          />
-        </p>
-        <p>
-          <span>Город: </span>
-          <input type="text" value={tempCity} onChange={(e) => setTempCity(e.target.value)} />
-        </p>
-        <p>
-          <span>ID пользователя: </span>
-          {uid}
-        </p>
-      </div>
-      <button className={styles.editButtonContainer}>
-        <TbCircleCheck className={styles.editButtonIcon} onClick={onSubmitClick} />
-      </button>
-    </div>
+    </div>)
+
   )
 }
 

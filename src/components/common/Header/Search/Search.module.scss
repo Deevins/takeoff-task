@@ -5,7 +5,7 @@
   flex-direction: row;
   width: 30%;
   @media screen and (max-width: 810px) {
-    display: none;
+    width: 50%;
   }
   
   .searchBlock_input {
@@ -13,12 +13,10 @@
     border: none;
     font-size: 17px;
     background: rgba(255, 255, 255, 0.6);
-    @media screen and (max-width: 1070px) {
-      font-size: 12px;
-      width: 40%;
+    @media screen and (max-width: 520px) {
+      width: 80%;
+      font-size: 10px;
     }
-
-
   }
 
   button {
@@ -32,25 +30,5 @@
       cursor: pointer;
 
     }
-  }
-}
-
-.headerButton {
-  border: 1px #768b94 solid;
-  border-radius: 9px;
-  background: rgba(220, 221, 222, 0.46);
-  padding: 3px 10px 3px 10px;
-  margin-right: 25px;
-  @media screen and (max-width: 670px) {
-    margin-right: 8px;
-    margin-left: 5px;
-  }
-
-  &:hover {
-    background: $navigation-button_hover;
-    cursor: pointer;
-    -webkit-transform: scale(1.02);
-    -ms-transform: scale(1.02);
-    transform: scale(1.02);
   }
 }

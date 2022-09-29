@@ -11,6 +11,7 @@ import { logout } from 'redux/user/userSlice'
 import Loader from '../Loader'
 import Search from './Search'
 import { auth } from '../../../firebase'
+import Button from "./components/Button";
 
 const Header: React.FC = () => {
   const [user] = useAuthState(auth)
@@ -36,9 +37,10 @@ const Header: React.FC = () => {
       </div>
       <Search />
       <div>
-        <button onClick={handleLogout} className={styles.headerButton}>
-          Выйти
-        </button>
+        {/*<button onClick={handleLogout} className={styles.headerButton}>*/}
+        {/*  Выйти*/}
+        {/*</button>*/}
+        <Button text={'Выйти'} onUserClick={handleLogout}/>
       </div>
     </div>
   ) : (

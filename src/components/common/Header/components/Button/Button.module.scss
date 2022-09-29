@@ -1,0 +1,21 @@
+@import "src/scss/variables";
+
+.headerButton {
+  border: 1px #768b94 solid;
+  border-radius: 9px;
+  background: rgba(220, 221, 222, 0.46);
+  padding: 3px 10px 3px 10px;
+  margin-right: 25px;
+  @media screen and (max-width: 670px) {
+    margin-right: 8px;
+    margin-left: 5px;
+  }
+
+  &:hover {
+    background: $navigation-button_hover;
+    cursor: pointer;
+    -webkit-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+}
